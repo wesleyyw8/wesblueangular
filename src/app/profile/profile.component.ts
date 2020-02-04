@@ -55,6 +55,29 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfile(form) {
-    console.log(form.value);
+    if (form.value.firstname !== '' && form.value.lastname !== '') {
+      this.isLoadingProfile = true;
+      this.profileService.setName(form.value.firstName, form.value.lastName).then((user: IProfile) => {
+        this.user = user;
+        this.saveEmail(user);
+        this.resetErrorMessage();
+        this.isLoadingProfile = false;
+      }, err => {
+        this.showError(err.error);
+        this.isLoadingProfile = false;
+      });
+    }
+  }
+
+  private saveEmail(user) {
+    this.isLoadingProfile = true;
+    this.profileService.setUserEmail(user).then((userResp: IProfile) => {
+      this.user = userResp;
+      this.resetErrorMessage();
+      this.isLoadingProfile = false;
+    }, err => {
+      this.showError(err.error);
+      this.isLoadingProfile = false;
+    });
   }
 }
