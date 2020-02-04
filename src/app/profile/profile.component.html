@@ -1,0 +1,87 @@
+<div class="card">
+
+  <div class="card-body">
+    <form #form="ngForm" (ngSubmit)="saveProfile(form)">
+      <fieldset [disabled]="isLoadingProfile || isSavingProfile">
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="username">User Name</label>
+          <div class="col-md-8">
+            <input 
+            id="username" 
+            name="username" 
+            class="form-control"
+            [(ngModel)]="user.username"
+            #userNameField="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="firstname">First Name</label>
+          <div class="col-md-8">
+            <input 
+            id="firstname" 
+            name="firstname" 
+            class="form-control"
+            [(ngModel)]="user.firstName"
+            #firstNameField="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="lastname">Last Name</label>
+          <div class="col-md-8">
+            <input 
+            id="lastname" 
+            name="lastname" 
+            class="form-control"
+            [(ngModel)]="user.lastName"
+            #lastNameField="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="email">Email</label>
+          <div class="col-md-8">
+            <input 
+            id="email" 
+            name="email" 
+            class="form-control"
+            disabled
+            [(ngModel)]="user.email"
+            #emailField="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="age">Age</label>
+          <div class="col-md-8">
+            <input 
+            id="age" 
+            name="age" 
+            class="form-control"
+            disabled
+            [(ngModel)]="user.age"
+            #ageField="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <div class="offset-md-6 col-md-4 text-right">
+            <button class="btn btn-primary"
+                    type="submit">
+              Save
+            </button>
+          </div>
+        </div>
+      </fieldset>
+      <p *ngIf="isLoadingProfile">Loading profile...</p>
+      <p *ngIf="isSavingProfile">Saving profile...</p>
+      <p *ngIf="error.isErrorShown" class="text-danger">
+        <b>{{error.message}}!
+        </b>
+        </p>
+    </form>
+  </div>
+</div>
+
