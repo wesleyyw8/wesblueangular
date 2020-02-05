@@ -55,13 +55,14 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfile(form) {
+    console.log('12312312')
     if (form.value.firstname !== '' && form.value.lastname !== '') {
+      console.log('adawd')
       this.isLoadingProfile = true;
+      this.resetErrorMessage();
       this.profileService.setName(form.value.firstName, form.value.lastName).then((user: IProfile) => {
         this.user = user;
         this.saveEmail(user);
-        this.resetErrorMessage();
-        this.isLoadingProfile = false;
       }, err => {
         this.showError(err.error);
         this.isLoadingProfile = false;
@@ -70,10 +71,8 @@ export class ProfileComponent implements OnInit {
   }
 
   private saveEmail(user) {
-    this.isLoadingProfile = true;
     this.profileService.setUserEmail(user).then((userResp: IProfile) => {
       this.user = userResp;
-      this.resetErrorMessage();
       this.isLoadingProfile = false;
     }, err => {
       this.showError(err.error);
